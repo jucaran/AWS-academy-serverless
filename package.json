@@ -12,7 +12,7 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.259.0",
     "@aws-sdk/client-sns": "^3.259.0",
-    "ebased": "^1.6.2"
+    "@ranty/nbased": "^3.3.0"
   },
   "devDependencies": {
     "serverless-iam-roles-per-function": "^3.2.0"

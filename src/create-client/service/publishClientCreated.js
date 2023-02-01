@@ -1,4 +1,4 @@
-const { publish } = require('ebased/service/downstream/sns')
+const { publish } = require('@ranty/nbased/service/downstream/sns')
 
 const publishNewClient = async (client) => {
   publish({

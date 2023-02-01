@@ -1,4 +1,4 @@
-const { putItem } = require('ebased/service/storage/dynamo')
+const { putItem } = require('@ranty/nbased/service/storage/dynamo')
 
 async function createClient(client) {
   await putItem({
