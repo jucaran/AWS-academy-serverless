@@ -8,7 +8,6 @@ class ValidateCreateClientInput extends InputValidation {
       source: meta.source,
       payload,
       schema: {
-        strict: true,
         dni: { type: String, required: true },
         firstName: { type: String, required: true },
         lastName: { type: String, required: true },
