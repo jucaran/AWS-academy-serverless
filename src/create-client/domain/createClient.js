@@ -11,7 +11,9 @@ module.exports = async (commandPayload, commandMeta) => {
   if (age < 18 || age > 65) {
     return {
       statusCode: 400,
-      body: 'Client must be between 18 and 65 years old',
+      body: {
+        message: 'Client must be between 18 and 65 years old' 
+      },
     }
   }
 
