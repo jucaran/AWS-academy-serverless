@@ -4,7 +4,7 @@ CreateClient:
   description: Validate and create client in DB.
   environment:
     CLIENTS_TABLE: !Ref ClientsTable
-    CLIENTS_CREATED_TOPIC: !Ref ClientCreatedTopic
+    CLIENT_CREATED_TOPIC: !Ref ClientCreatedTopic
   iamRoleStatementsName: juanCastroArancibia-integrador-create-client
   iamRoleStatementsInherit: true
   iamRoleStatements: 
