@@ -7,26 +7,24 @@ const { calculateAge } = require('../helper/calcAge')
 module.exports = async (commandPayload, commandMeta) => {
   const client = new ValidateCreateClientInput(commandPayload, commandMeta).get()
 
-  if (
-    calculateAge(commandPayload.birth) < 18 ||
-    calculateAge(commandPayload.birth) > 65
-  ) {
+  const age = calculateAge(commandPayload.birth)
+  if (age < 18 || age > 65) {
     return {
       statusCode: 400,
-      body: "Client must be between 18 and 65 years old",
-    };
+      body: 'Client must be between 18 and 65 years old',
+    }
   }
 
-  console.log("SAVING ON DYNAMO")
+  console.log('SAVING ON DYNAMO')
   await createClient(client)
 
-  console.log("SENDING TO SNS")
+  console.log('SENDING TO SNS')
   const clientCreatedEvent = new ClientCreated(commandPayload, commandMeta)
   await publishNewClient(clientCreatedEvent)
 
-  console.log("SENDING RESPONSE")
+  console.log('SENDING RESPONSE')
   return {
     status: 200,
-    body: JSON.stringify('Usuario creado correctamente'),
+    body: { message: 'Usuario creado correctamente' },
   }
 }
