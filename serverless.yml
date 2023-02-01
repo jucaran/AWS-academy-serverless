@@ -1,4 +1,4 @@
-service: createClient
+service: juanCastroArancibia-practicoIntegrador
 
 provider:
   name: aws
@@ -11,38 +11,37 @@ plugins:
 
 functions:
   - ${file(src/create-client/create-client.yml)}
+  - AssignGift:
+      handler: assign-gift/index.handler
+      name: ${self:service}-${self:provider.stage}-assign-gift-function
+      environment:
+        CLIENTS_TABLE: !Ref ClientsTable
+      iamRoleStatementsInherit: true
+      iamRoleStatements: 
+        - Effect: Allow
+          Action:
+            - dynamodb:UpdateItem
+          Resource:
+            - !GetAtt ClientsTable.Arn
+      events:
+        - sqs:
+            arn: !GetAtt AssignGiftQueue.Arn
 
-  AssignGift:
-    handler: assign-gift/index.handler
-    name: ${self:service}-${self:provider.stage}-assign-gift-function
-    environment:
-      CLIENTS_TABLE: !Ref ClientsTable
-    iamRoleStatementsInherit: true
-    iamRoleStatements: 
-      - Effect: Allow
-        Action:
-          - dynamodb:UpdateItem
-        Resource:
-          - !GetAtt ClientsTable.Arn
-    events:
-      - sqs:
-          arn: !GetAtt AssignGiftQueue.Arn
-
-  AssignCard:
-    handler: assign-card/index.handler
-    name: ${self:service}-${self:provider.stage}-assign-card-function
-    environment:
-      CLIENTS_TABLE: !Ref ClientsTable
-    iamRoleStatementsInherit: true
-    iamRoleStatements: 
-      - Effect: Allow
-        Action:
-          - dynamodb:UpdateItem
-        Resource:
-          - !GetAtt ClientsTable.Arn
-    events:
-      - sqs:
-          arn: !GetAtt AssignCardQueue.Arn
+  - AssignCard:
+      handler: assign-card/index.handler
+      name: ${self:service}-${self:provider.stage}-assign-card-function
+      environment:
+        CLIENTS_TABLE: !Ref ClientsTable
+      iamRoleStatementsInherit: true
+      iamRoleStatements: 
+        - Effect: Allow
+          Action:
+            - dynamodb:UpdateItem
+          Resource:
+            - !GetAtt ClientsTable.Arn
+      events:
+        - sqs:
+            arn: !GetAtt AssignCardQueue.Arn
 
 resources:
   Resources:
