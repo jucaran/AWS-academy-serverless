@@ -30,5 +30,5 @@ const getGift = rawBirthdate => {
 }
 
 module.exports = {
-  getGift
+  getGift,
 }

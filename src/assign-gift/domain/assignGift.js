@@ -3,7 +3,7 @@ const { getClient } = require('../service/getClient')
 const { assignGift } = require('../service/assignGift')
 
 module.exports = async (eventPayload, eventMeta) => {
-  const payload = JSON.parse(eventPayload.Message);
+  const payload = JSON.parse(eventPayload.Message)
   new ValidateAssignGiftInput(payload, eventMeta)
 
   const client = await getClient(payload)
@@ -12,7 +12,7 @@ module.exports = async (eventPayload, eventMeta) => {
     return {
       statusCode: 409,
       body: {
-        message: 'El cliente ya tiene asignada un regalo'
+        message: 'El cliente ya tiene asignada un regalo',
       },
     }
   }

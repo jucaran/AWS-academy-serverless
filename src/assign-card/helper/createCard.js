@@ -37,5 +37,5 @@ const getAge = rawBirthdate => {
 }
 
 module.exports = {
-  getNewCard
+  getNewCard,
 }

@@ -3,7 +3,7 @@ const { getClient } = require('../service/getClient')
 const { assignCard } = require('../service/assignCard')
 
 module.exports = async (eventPayload, eventMeta) => {
-  const payload = JSON.parse(eventPayload.Message);
+  const payload = JSON.parse(eventPayload.Message)
   new ValidateAssignCardInput(payload, eventMeta)
 
   const client = await getClient(payload)
@@ -12,7 +12,7 @@ module.exports = async (eventPayload, eventMeta) => {
     return {
       statusCode: 409,
       body: {
-        message: 'El cliente ya tiene asignada una tarjeta'
+        message: 'El cliente ya tiene asignada una tarjeta',
       },
     }
   }
