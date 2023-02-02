@@ -2,6 +2,7 @@ import { getClient, saveClientGift } from './data.mjs'
 import { getGift } from './utils.mjs'
 
 export const handler = async event => {
+  console.log("EVENT: ", event)
   const clients = event.Records.map(record => JSON.parse(record.body))
 
   for (let client of clients) {

@@ -1,0 +1,21 @@
+  - AssignCard:
+      handler: src/assign-card/handler/assignCard.handler
+      name: ${self:service}-${self:provider.stage}-assign-card-function
+      environment:
+        CLIENTS_TABLE: !Ref ClientsTable
+      iamRoleStatementsName: juanCastroArancibia-integrador-assign-card
+      iamRoleStatementsInherit: true
+      iamRoleStatements: 
+        - Effect: Allow
+          Action:
+            - dynamodb:UpdateItem
+          Resource:
+            - !GetAtt ClientsTable.Arn
+        - Effect: Allow
+          Action:
+            - dynamodb:GetItem
+          Resource:
+            - !GetAtt ClientsTable.Arn
+      events:
+        - sqs:
+            arn: !GetAtt AssignCardQueue.Arn

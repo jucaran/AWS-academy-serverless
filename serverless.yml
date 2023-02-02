@@ -11,6 +11,7 @@ plugins:
 
 functions:
   - ${file(src/create-client/create-client.yml)}
+  - ${file(src/assign-card/assign-card.yml)}
   - AssignGift:
       handler: assign-gift/index.handler
       name: ${self:service}-${self:provider.stage}-assign-gift-function
@@ -28,22 +29,6 @@ functions:
         - sqs:
             arn: !GetAtt AssignGiftQueue.Arn
 
-  - AssignCard:
-      handler: assign-card/index.handler
-      name: ${self:service}-${self:provider.stage}-assign-card-function
-      environment:
-        CLIENTS_TABLE: !Ref ClientsTable
-      iamRoleStatementsName: juanCastroArancibia-integrador-assign-card
-      iamRoleStatementsInherit: true
-      iamRoleStatements: 
-        - Effect: Allow
-          Action:
-            - dynamodb:UpdateItem
-          Resource:
-            - !GetAtt ClientsTable.Arn
-      events:
-        - sqs:
-            arn: !GetAtt AssignCardQueue.Arn
 
 resources:
   Resources:
