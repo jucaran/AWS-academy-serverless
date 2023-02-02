@@ -5,7 +5,7 @@ const publishNewClient = async (clientEvent) => {
 
   await publish({
     Message: eventPayload,
-    TopicArn: process.env.CLIENT_CREATED_TOPIC
+    TopicArn: process.env.CLIENT_TOPIC
   }, eventMeta)
 }
 

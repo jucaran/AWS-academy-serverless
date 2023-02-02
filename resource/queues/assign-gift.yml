@@ -26,6 +26,6 @@ Resources:
             Condition:
               ArnLike:
                 aws:SourceArn:
-                  - !Ref ClientCreatedTopic
+                  - !Ref ClientTopic
       Queues: 
         - !Ref AssignGiftQueue
