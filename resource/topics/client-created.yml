@@ -1,0 +1,13 @@
+Resources:
+  ClientCreatedTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      DisplayName: Client Created Topic
+      TopicName: ${self:service}-${self:provider.stage}-client-created-topic
+      Subscription:
+        - Protocol: sqs
+          Endpoint: !GetAtt AssignCardQueue.Arn
+        - Protocol: sqs
+          Endpoint: !GetAtt AssignGiftQueue.Arn
+        - Protocol: email
+          Endpoint: 'juan.castro.arancibia@gmail.com'

@@ -1,0 +1,31 @@
+Resources:
+  AssignGiftQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: ${self:service}-${self:provider.stage}-assign-gift-queue
+
+  AssignGiftQueuePolicy:
+    Type: AWS::SQS::QueuePolicy
+    Properties: 
+      PolicyDocument: 
+        Statement:
+          - Effect: Allow
+            Action: 
+              - SQS:*
+            Resource: !GetAtt AssignGiftQueue.Arn
+            Principal:
+              AWS:
+                - !Ref AWS::AccountId
+          - Effect: Allow
+            Principal:
+              AWS: 
+                - '*'
+            Action: 
+              - SQS:SendMessage
+            Resource: !GetAtt AssignGiftQueue.Arn
+            Condition:
+              ArnLike:
+                aws:SourceArn:
+                  - !Ref ClientCreatedTopic
+      Queues: 
+        - !Ref AssignGiftQueue

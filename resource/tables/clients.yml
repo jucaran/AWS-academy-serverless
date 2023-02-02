@@ -1,0 +1,14 @@
+Resources:
+  ClientsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:service}-${self:provider.stage}-clients-table
+      AttributeDefinitions:
+        - AttributeName: dni
+          AttributeType: S
+      KeySchema:
+        - AttributeName: dni
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
