@@ -1,8 +1,8 @@
-const { ValidateCreateClientInput } = require('../schema/input/createClient.input')
-const { ClientCreated } = require('../schema/event/clientCreated.event')
-const { createClient } = require('../service/createClient')
-const { publishNewClient } = require('../service/publishClientCreated')
-const { calculateAge } = require('../helper/calcAge')
+const { ValidateCreateClientInput } = require('../schema/input/create-client')
+const { ClientCreated } = require('../schema/event/client-created')
+const { createClient } = require('../service/create-client')
+const { publishNewClient } = require('../service/publish-client-created')
+const { calculateAge } = require('../helper/calc-age')
 
 module.exports = async (commandPayload, commandMeta) => {
   const client = new ValidateCreateClientInput(commandPayload, commandMeta).get()
