@@ -21,7 +21,7 @@ const getCardExpire = () => {
 
 const getCardCvv = () => Math.floor(Math.random() * 999).toString()
 
-const getClientType = birthdate => (getAge(birthdate) > 45 ? 'Classic' : 'Gold')
+const getClientType = birthdate => (getAge(birthdate) > 45 ? 'Gold' : 'Classic')
 
 const getAge = rawBirthdate => {
   const [date, month, year] = rawBirthdate.split('/')
