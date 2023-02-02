@@ -1,6 +1,6 @@
-const { ValidateAssignCardInput } = require('../schema/input/assignCard')
-const { getClient } = require('../service/getClient')
-const { assignCard } = require('../service/assignCard')
+const { ValidateAssignCardInput } = require('../schema/input/assign-card')
+const { getClient } = require('../service/get-client')
+const { assignCard } = require('../service/assign-card')
 
 module.exports = async (eventPayload, eventMeta) => {
   const payload = JSON.parse(eventPayload.Message)

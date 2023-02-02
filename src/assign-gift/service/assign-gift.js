@@ -1,19 +1,19 @@
 const { updateItem } = require('@ranty/nbased/service/storage/dynamo')
-const { getNewCard } = require('../helper/createCard')
+const { getGift } = require('../helper/get-gift')
 
-const assignCard = async client => {
+const assignGift = async client => {
   await updateItem({
     TableName: process.env.CLIENTS_TABLE,
     Key: {
       dni: client.dni,
     },
-    UpdateExpression: 'SET card = :card',
+    UpdateExpression: 'SET gift = :gift',
     ExpressionAttributeValues: {
-      ':card': getNewCard(client.birthdate),
+      ':gift': getGift(client.birthdate),
     },
   })
 }
 
 module.exports = {
-  assignCard,
+  assignGift,
 }

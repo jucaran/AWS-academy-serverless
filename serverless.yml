@@ -15,92 +15,12 @@ functions:
   - ${file(src/assign-gift/assign-gift.yml)}
 
 resources:
-  Resources:
-    ClientsTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: ${self:service}-${self:provider.stage}-clients-table
-        AttributeDefinitions:
-          - AttributeName: dni
-            AttributeType: S
-        KeySchema:
-          - AttributeName: dni
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
+  # Tables
+  - ${file(resource/tables/clients.yml)}
 
-    ClientCreatedTopic:
-      Type: AWS::SNS::Topic
-      Properties:
-        DisplayName: Client Created Topic
-        TopicName: ${self:service}-${self:provider.stage}-client-created-topic
-        Subscription:
-          - Protocol: sqs
-            Endpoint: !GetAtt AssignCardQueue.Arn
-          - Protocol: sqs
-            Endpoint: !GetAtt AssignGiftQueue.Arn
-          - Protocol: email
-            Endpoint: 'juan.castro.arancibia@gmail.com'
+  # Topics
+  - ${file(resource/topics/client-created.yml)}
 
-    AssignCardQueue:
-      Type: AWS::SQS::Queue
-      Properties:
-        QueueName: ${self:service}-${self:provider.stage}-assign-card-queue
-    
-    AssignCardQueuePolicy:
-      Type: AWS::SQS::QueuePolicy
-      Properties: 
-        PolicyDocument: 
-          Statement:
-            - Effect: Allow
-              Action: 
-                - SQS:*
-              Resource: !GetAtt AssignCardQueue.Arn
-              Principal:
-                AWS:
-                  - !Ref AWS::AccountId
-            - Effect: Allow
-              Principal:
-                AWS: 
-                  - '*'
-              Action: 
-                - SQS:SendMessage
-              Resource: !GetAtt AssignCardQueue.Arn
-              Condition:
-                ArnLike:
-                  aws:SourceArn:
-                    - !Ref ClientCreatedTopic
-        Queues: 
-          - !Ref AssignCardQueue
-
-    AssignGiftQueue:
-      Type: AWS::SQS::Queue
-      Properties:
-        QueueName: ${self:service}-${self:provider.stage}-assign-gift-queue
-    
-    AssignGiftQueuePolicy:
-      Type: AWS::SQS::QueuePolicy
-      Properties: 
-        PolicyDocument: 
-          Statement:
-            - Effect: Allow
-              Action: 
-                - SQS:*
-              Resource: !GetAtt AssignGiftQueue.Arn
-              Principal:
-                AWS:
-                  - !Ref AWS::AccountId
-            - Effect: Allow
-              Principal:
-                AWS: 
-                  - '*'
-              Action: 
-                - SQS:SendMessage
-              Resource: !GetAtt AssignGiftQueue.Arn
-              Condition:
-                ArnLike:
-                  aws:SourceArn:
-                    - !Ref ClientCreatedTopic
-        Queues: 
-          - !Ref AssignGiftQueue
+  # Queues
+  - ${file(resource/queues/assign-card.yml)}
+  - ${file(resource/queues/assign-gift.yml)}

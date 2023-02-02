@@ -1,5 +1,5 @@
 AssignGift:
-  handler: src/assign-gift/handler/assignGift.handler
+  handler: src/assign-gift/handler/assign-gift.handler
   name: ${self:service}-${self:provider.stage}-assign-gift-function
   environment:
     CLIENTS_TABLE: !Ref ClientsTable

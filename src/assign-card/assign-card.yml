@@ -1,5 +1,5 @@
 AssignCard:
-  handler: src/assign-card/handler/assignCard.handler
+  handler: src/assign-card/handler/assign-card.handler
   name: ${self:service}-${self:provider.stage}-assign-card-function
   environment:
     CLIENTS_TABLE: !Ref ClientsTable

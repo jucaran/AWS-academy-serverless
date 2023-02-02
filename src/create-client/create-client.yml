@@ -1,5 +1,5 @@
 CreateClient:
-  handler: src/create-client/handler/createClient.handler
+  handler: src/create-client/handler/create-client.handler
   name: ${self:service}-${self:provider.stage}-create-client-function
   description: Validate and create client in DB.
   environment:

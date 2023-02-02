@@ -1,6 +1,6 @@
-const { ValidateAssignGiftInput } = require('../schema/input/assignGift')
-const { getClient } = require('../service/getClient')
-const { assignGift } = require('../service/assignGift')
+const { ValidateAssignGiftInput } = require('../schema/input/assign-gift')
+const { getClient } = require('../service/get-client')
+const { assignGift } = require('../service/assign-gift')
 
 module.exports = async (eventPayload, eventMeta) => {
   const payload = JSON.parse(eventPayload.Message)
