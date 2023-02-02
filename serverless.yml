@@ -1,4 +1,4 @@
-service: createClient
+service: juanArancibia-practicoIntegrador
 
 provider:
   name: aws
@@ -10,62 +10,9 @@ plugins:
   - serverless-iam-roles-per-function
 
 functions:
-  CreateClient:
-    handler: create-client/index.handler
-    name: ${self:service}-${self:provider.stage}-create-client-function
-    description: Validate and create client in DB.
-    environment:
-      CLIENTS_TABLE: !Ref ClientsTable
-      CLIENTS_CREATED_TOPIC: !Ref ClientCreatedTopic
-    iamRoleStatementsInherit: true
-    iamRoleStatements: 
-      - Effect: Allow
-        Action:
-          - sns:Publish
-        Resource:
-          - !Ref ClientCreatedTopic
-      - Effect: Allow
-        Action:
-          - dynamodb:PutItem
-        Resource:
-          - !GetAtt ClientsTable.Arn
-    events:
-      - http:
-          path: /client
-          method: post
-          cors: true
-
-  AssignGift:
-    handler: assign-gift/index.handler
-    name: ${self:service}-${self:provider.stage}-assign-gift-function
-    environment:
-      CLIENTS_TABLE: !Ref ClientsTable
-    iamRoleStatementsInherit: true
-    iamRoleStatements: 
-      - Effect: Allow
-        Action:
-          - dynamodb:UpdateItem
-        Resource:
-          - !GetAtt ClientsTable.Arn
-    events:
-      - sqs:
-          arn: !GetAtt AssignGiftQueue.Arn
-
-  AssignCard:
-    handler: assign-card/index.handler
-    name: ${self:service}-${self:provider.stage}-assign-card-function
-    environment:
-      CLIENTS_TABLE: !Ref ClientsTable
-    iamRoleStatementsInherit: true
-    iamRoleStatements: 
-      - Effect: Allow
-        Action:
-          - dynamodb:UpdateItem
-        Resource:
-          - !GetAtt ClientsTable.Arn
-    events:
-      - sqs:
-          arn: !GetAtt AssignCardQueue.Arn
+  - ${file(src/create-client/create-client.yml)}
+  - ${file(src/assign-card/assign-card.yml)}
+  - ${file(src/assign-gift/assign-gift.yml)}
 
 resources:
   Resources:
@@ -93,6 +40,8 @@ resources:
             Endpoint: !GetAtt AssignCardQueue.Arn
           - Protocol: sqs
             Endpoint: !GetAtt AssignGiftQueue.Arn
+          - Protocol: email
+            Endpoint: 'juan.castro.arancibia@gmail.com'
 
     AssignCardQueue:
       Type: AWS::SQS::Queue
