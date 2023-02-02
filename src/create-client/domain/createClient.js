@@ -12,7 +12,7 @@ module.exports = async (commandPayload, commandMeta) => {
     return {
       statusCode: 400,
       body: {
-        message: 'Client must be between 18 and 65 years old' 
+        message: 'El cliente debe tener entre 18 y 65 años' 
       },
     }
   }
