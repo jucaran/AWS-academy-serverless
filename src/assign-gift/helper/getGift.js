@@ -1,4 +1,4 @@
-export const getGift = rawBirthdate => {
+const getGift = rawBirthdate => {
   const [day, month, year] = rawBirthdate.split('/')
   const birthdate = new Date(+year, +month, +day)
   let date = Math.floor((birthdate - new Date(birthdate.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24))
@@ -27,4 +27,8 @@ export const getGift = rawBirthdate => {
     summer: 'remera',
   }
   return gifts[season || 'summer']
+}
+
+module.exports = {
+  getGift
 }
