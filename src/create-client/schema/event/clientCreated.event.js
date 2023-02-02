@@ -2,12 +2,12 @@
 
 const { DownstreamEvent } = require('@ranty/nbased/schema/downstreamEvent')
 
-const inputSchema = {
+const eventSchema = {
   schema: {
-    name: { type: String, required: true },
+    firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     dni: { type: String, required: true },
-    birth: { type: String, required: true },
+    birthdate: { type: String, required: true },
   },
   settings: { strict: false },
 }
@@ -18,8 +18,9 @@ class ClientCreated extends DownstreamEvent {
       type: 'CREATE_CLIENT.EVENT',
       specversion: 'v1.0.0',
       source: meta.source,
+      meta,
       payload,
-      inputSchema,
+      eventSchema,
     })
   }
 }

@@ -1,10 +1,12 @@
 const { publish } = require('@ranty/nbased/service/downstream/sns')
 
-const publishNewClient = async (client) => {
-  publish({
-    Message: client,
+const publishNewClient = async (clientEvent) => {
+  const { eventPayload, eventMeta } = clientEvent.get()
+
+  await publish({
+    Message: eventPayload,
     TopicArn: process.env.CLIENT_CREATED_TOPIC
-  })
+  }, eventMeta)
 }
 
 module.exports = {

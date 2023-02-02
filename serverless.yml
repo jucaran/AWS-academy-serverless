@@ -71,6 +71,8 @@ resources:
             Endpoint: !GetAtt AssignCardQueue.Arn
           - Protocol: sqs
             Endpoint: !GetAtt AssignGiftQueue.Arn
+          - Protocol: email
+            Endpoint: 'juan.castro.arancibia@gmail.com'
 
     AssignCardQueue:
       Type: AWS::SQS::Queue

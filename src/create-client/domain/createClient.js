@@ -17,14 +17,11 @@ module.exports = async (commandPayload, commandMeta) => {
     }
   }
 
-  console.log('SAVING ON DYNAMO')
   await createClient(client)
 
-  console.log('SENDING TO SNS')
   const clientCreatedEvent = new ClientCreated(commandPayload, commandMeta)
   await publishNewClient(clientCreatedEvent)
 
-  console.log('SENDING RESPONSE')
   return {
     status: 200,
     body: { message: 'Usuario creado correctamente' },
