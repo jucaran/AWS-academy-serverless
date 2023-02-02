@@ -1,7 +1,7 @@
 GetClients:
   handler: src/get-clients/handler/get-clients.handler
   name: ${self:service}-${self:provider.stage}-get-clients-function
-  description: Get clients on DB.
+  description: Get all clients on DB.
   environment:
     CLIENTS_TABLE: !Ref ClientsTable
   iamRoleStatementsName: juanCastroArancibia-integrador-get-clients
@@ -9,6 +9,11 @@ GetClients:
     - Effect: Allow
       Action:
         - dynamodb:Scan
+      Resource:
+        - !GetAtt ClientsTable.Arn
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
       Resource:
         - !GetAtt ClientsTable.Arn
   events:

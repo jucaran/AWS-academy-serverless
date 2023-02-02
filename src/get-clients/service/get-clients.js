@@ -1,15 +1,12 @@
 const { scanTable } = require('@ranty/nbased/service/storage/dynamo')
 
 async function getClients() {
-  const clients = await scanTable({
+  const result = await scanTable({
     TableName: process.env.CLIENTS_TABLE,
+    ProjectionExpression: 'firstName, lastName, dni, birthdate'
   })
 
-  return clients.Items.map(client => { 
-    const type = client.card?.type
-    delete client.card
-    return {...client, type }
-  })
+  return result.Items
 }
 
 module.exports = {
