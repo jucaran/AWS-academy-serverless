@@ -3,7 +3,9 @@
 const { InputValidation } = require('@ranty/nbased/schema/inputValidation')
 
 const inputSchema = {
-  schema: {},
+  schema: {
+    dni: { type: String, required: false }
+  },
   settings: { strict: true },
 }
 
