@@ -24,6 +24,6 @@ module.exports = async (commandPayload, commandMeta) => {
 
   return {
     status: 200,
-    body: { message: 'Usuario creado correctamente' },
+    body: { message: 'Cliente creado correctamente' },
   }
 }
