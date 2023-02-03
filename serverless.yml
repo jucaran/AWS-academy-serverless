@@ -10,22 +10,31 @@ plugins:
   - serverless-iam-roles-per-function
 
 functions:
-  - ${file(src/create-client/create-client.yml)}
-  - ${file(src/update-client/update-client.yml)}
-  - ${file(src/delete-client/delete-client.yml)}
-  - ${file(src/get-all-clients/get-all-clients.yml)}
-  - ${file(src/get-client/get-client.yml)}
+  # Clients
+  - ${file(src/clients/create-client/create-client.yml)}
+  - ${file(src/clients/update-client/update-client.yml)}
+  - ${file(src/clients/delete-client/delete-client.yml)}
+  - ${file(src/clients/get-all-clients/get-all-clients.yml)}
+  - ${file(src/clients/get-client/get-client.yml)}
 
-  - ${file(src/assign-card/assign-card.yml)}
-  - ${file(src/assign-gift/assign-gift.yml)}
+  - ${file(src/clients/assign-card/assign-card.yml)}
+  - ${file(src/clients/assign-gift/assign-gift.yml)}
+
+  # Purchases
+  - ${file(src/purchases/create-purchase/create-purchase.yml)}
+  - ${file(src/purchases/add-points/add-points.yml)}
+
 
 resources:
   # Tables
   - ${file(resource/tables/clients.yml)}
+  - ${file(resource/tables/purchases.yml)}
 
   # Topics
   - ${file(resource/topics/client-created.yml)}
+  - ${file(resource/topics/purchase-created.yml)}
 
   # Queues
   - ${file(resource/queues/assign-card.yml)}
   - ${file(resource/queues/assign-gift.yml)}
+  - ${file(resource/queues/add-points.yml)}

@@ -1,0 +1,24 @@
+DeleteClient:
+  handler: src/clients/delete-client/handler/delete-client.handler
+  name: ${self:service}-${self:provider.stage}-delete-client-function
+  description: Deactivate client on DB.
+  environment:
+    CLIENTS_TABLE: !Ref ClientsTable
+  iamRoleStatementsName: juanCastroArancibia-integrador-delete-client
+  iamRoleStatementsInherit: true
+  iamRoleStatements: 
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+      Resource:
+        - !GetAtt ClientsTable.Arn
+    - Effect: Allow
+      Action:
+        - dynamodb:UpdateItem
+      Resource:
+        - !GetAtt ClientsTable.Arn
+  events:
+    - http:
+        path: /clients/{dni}
+        method: delete
+        cors: true

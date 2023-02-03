@@ -1,0 +1,18 @@
+GetClient:
+  handler: src/clients/get-client/handler/get-client.handler
+  name: ${self:service}-${self:provider.stage}-get-client-function
+  description: Get client by id from DB.
+  environment:
+    CLIENTS_TABLE: !Ref ClientsTable
+  iamRoleStatementsName: juanCastroArancibia-integrador-get-client
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+      Resource:
+        - !GetAtt ClientsTable.Arn
+  events:
+    - http:
+        path: /clients/{dni}
+        method: get
+        cors: true

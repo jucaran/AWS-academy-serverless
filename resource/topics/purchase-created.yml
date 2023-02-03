@@ -1,0 +1,11 @@
+Resources:
+  PurchaseTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      DisplayName: Purchase Created Topic
+      TopicName: ${self:service}-${self:provider.stage}-purchase-topic
+      Subscription:
+        - Protocol: sqs
+          Endpoint: !GetAtt AddPointsQueue.Arn
+        - Protocol: email
+          Endpoint: 'juan.castro.arancibia@gmail.com'

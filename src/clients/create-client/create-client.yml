@@ -1,0 +1,25 @@
+CreateClient:
+  handler: src/clients/create-client/handler/create-client.handler
+  name: ${self:service}-${self:provider.stage}-create-client-function
+  description: Validate and create client in DB.
+  environment:
+    CLIENTS_TABLE: !Ref ClientsTable
+    CLIENT_TOPIC: !Ref ClientTopic
+  iamRoleStatementsName: juanCastroArancibia-integrador-create-client
+  iamRoleStatementsInherit: true
+  iamRoleStatements: 
+    - Effect: Allow
+      Action:
+        - sns:Publish
+      Resource:
+        - !Ref ClientTopic
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+      Resource:
+        - !GetAtt ClientsTable.Arn
+  events:
+    - http:
+        path: /clients
+        method: post
+        cors: true
