@@ -1,5 +1,5 @@
-const { ValidateGetClientsInput } = require('../schema/input/get-clients')
-const { getClients } = require('../service/get-clients')
+const { ValidateGetClientsInput } = require('../schema/input/get-all-clients')
+const { getClients } = require('../service/get-all-clients')
 const { getClient } = require('../service/get-client')
 
 module.exports = async (payload, metadata) => {
