@@ -1,10 +1,10 @@
-GetClients:
-  handler: src/get-clients/handler/get-clients.handler
-  name: ${self:service}-${self:provider.stage}-get-clients-function
+GetAllClients:
+  handler: src/get-all-clients/handler/get-all-clients.handler
+  name: ${self:service}-${self:provider.stage}-get-all-clients-function
   description: Get all clients on DB.
   environment:
     CLIENTS_TABLE: !Ref ClientsTable
-  iamRoleStatementsName: juanCastroArancibia-integrador-get-clients
+  iamRoleStatementsName: juanCastroArancibia-integrador-get-all-clients
   iamRoleStatements:
     - Effect: Allow
       Action:
