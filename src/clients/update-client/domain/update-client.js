@@ -18,21 +18,24 @@ module.exports = async (payload, metadata) => {
       },
     }
 
-  const age = calculateAge(payload.birthdate)
-  if (age < 18 || age > 65)
+  if (clientUpdated.birthdate) {
+    const age = calculateAge(payload.birthdate)
+    if (age < 18 || age > 65)
+      return {
+        status: 400,
+        body: {
+          message: 'El cliente debe tener entre 18 y 65 años',
+        },
+      }
+  }
+
+  if (!getDifferences(clientUpdated, oldClient))
     return {
-      status: 400,
+      status: 200,
       body: {
-        message: 'El cliente debe tener entre 18 y 65 años',
+        message: 'Cliente sin cambios a actualizar',
       },
     }
-  
-  if (!getDifferences(clientUpdated, oldClient)) return {
-    status: 200,
-    body: {
-      message: 'Cliente sin cambios a actualizar',
-    },
-  }
 
   await updateClient(clientUpdated, oldClient)
 
