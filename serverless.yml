@@ -22,6 +22,7 @@ functions:
 resources:
   # Tables
   - ${file(resource/tables/clients.yml)}
+  - ${file(resource/tables/purchases.yml)}
 
   # Topics
   - ${file(resource/topics/client-created.yml)}
