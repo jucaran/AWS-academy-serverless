@@ -1,4 +1,4 @@
-GetClients:
+GetAllClients:
   handler: src/get-all-clients/handler/get-all-clients.handler
   name: ${self:service}-${self:provider.stage}-get-all-clients-function
   description: Get all clients on DB.

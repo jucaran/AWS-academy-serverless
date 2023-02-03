@@ -12,6 +12,7 @@ plugins:
 functions:
   - ${file(src/create-client/create-client.yml)}
   - ${file(src/get-all-clients/get-all-clients.yml)}
+  - ${file(src/get-client/get-client.yml)}
   - ${file(src/assign-card/assign-card.yml)}
   - ${file(src/assign-gift/assign-gift.yml)}
 
