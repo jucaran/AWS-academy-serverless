@@ -4,7 +4,7 @@ CreateClient:
   description: Validate and create client in DB.
   environment:
     CLIENTS_TABLE: !Ref ClientsTable
-    CLIENT_CREATED_TOPIC: !Ref ClientCreatedTopic
+    CLIENT_TOPIC: !Ref ClientTopic
   iamRoleStatementsName: juanCastroArancibia-integrador-create-client
   iamRoleStatementsInherit: true
   iamRoleStatements: 
@@ -12,7 +12,7 @@ CreateClient:
       Action:
         - sns:Publish
       Resource:
-        - !Ref ClientCreatedTopic
+        - !Ref ClientTopic
     - Effect: Allow
       Action:
         - dynamodb:PutItem
@@ -20,6 +20,6 @@ CreateClient:
         - !GetAtt ClientsTable.Arn
   events:
     - http:
-        path: /client
+        path: /clients
         method: post
         cors: true

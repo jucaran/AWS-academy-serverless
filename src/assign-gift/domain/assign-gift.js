@@ -8,15 +8,6 @@ module.exports = async (eventPayload, eventMeta) => {
 
   const client = await getClient(payload)
 
-  if (client.gift) {
-    return {
-      statusCode: 409,
-      body: {
-        message: 'El cliente ya tiene asignada un regalo',
-      },
-    }
-  }
-
   await assignGift(client)
 
   return {

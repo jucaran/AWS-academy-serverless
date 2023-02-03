@@ -1,9 +1,9 @@
 Resources:
-  ClientCreatedTopic:
+  ClientTopic:
     Type: AWS::SNS::Topic
     Properties:
-      DisplayName: Client Created Topic
-      TopicName: ${self:service}-${self:provider.stage}-client-created-topic
+      DisplayName: Client Created/Updated Topic
+      TopicName: ${self:service}-${self:provider.stage}-client-topic
       Subscription:
         - Protocol: sqs
           Endpoint: !GetAtt AssignCardQueue.Arn

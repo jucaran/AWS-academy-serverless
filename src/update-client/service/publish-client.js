@@ -1,6 +1,6 @@
 const { publish } = require('@ranty/nbased/service/downstream/sns')
 
-const publishNewClient = async (clientEvent) => {
+const publishClient = async (clientEvent) => {
   const { eventPayload, eventMeta } = clientEvent.get()
 
   await publish({
@@ -10,6 +10,6 @@ const publishNewClient = async (clientEvent) => {
 }
 
 module.exports = {
-  publishNewClient,
+  publishClient,
 }
 

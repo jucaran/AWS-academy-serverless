@@ -8,15 +8,6 @@ module.exports = async (eventPayload, eventMeta) => {
 
   const client = await getClient(payload)
 
-  if (client.card) {
-    return {
-      statusCode: 409,
-      body: {
-        message: 'El cliente ya tiene asignada una tarjeta',
-      },
-    }
-  }
-
   await assignCard(client)
 
   return {
