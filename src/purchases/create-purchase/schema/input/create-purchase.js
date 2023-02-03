@@ -5,10 +5,15 @@ const { InputValidation } = require('@ranty/nbased/schema/inputValidation')
 const inputSchema = {
   schema: {
     client: { type: String, required: true },
-    products: [
-      { name: { type: String, required: true } },
-      { price: { type: Number, required: true } }
-    ],
+    products: {
+      type: [
+        {
+          name: String,
+          price: Number,
+        },
+      ],
+      required: true,
+    },
   },
   settings: { strict: true },
 }

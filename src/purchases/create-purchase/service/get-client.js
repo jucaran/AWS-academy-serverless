@@ -6,13 +6,6 @@ const getClient = async dni => {
     Key: {
       dni
     },
-    FilterExpression: '#active = :active',
-    ExpressionAttributeNames: {
-      '#active': 'active',
-    },
-    ExpressionAttributeValues: {
-      ':active': true,
-    },
   })
 
   return result.Item

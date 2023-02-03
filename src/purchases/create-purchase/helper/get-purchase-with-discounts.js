@@ -3,7 +3,8 @@ const getPurchaseWithDiscounts = (purchase, client) => {
   const products = purchase.products.map(product => {
     return {
       ...product,
-      finalPrice: clientType == 'Gold' ? product.price * 0.88 : product.price * 0.92,
+      price: product.price.toFixed(2),
+      finalPrice: (clientType == 'Gold' ? product.price * 0.88 : product.price * 0.92).toFixed(2)
     }
   })
 

@@ -8,9 +8,9 @@ const { publishNewPurchase } = require('../service/publish-purchase-created')
 module.exports = async (payload, metadata) => {
   const purchase = new ValidateCreatePurchaseInput(payload, metadata).get()
 
-  const client = getClient(payload.client)
+  const client = await getClient(payload.client)
 
-  if (!client)
+  if (!client || !client.active)
     return {
       status: 404,
       body: { message: 'Cliente no encontrado' },
@@ -20,7 +20,7 @@ module.exports = async (payload, metadata) => {
 
   await createPurchase(purchaseWithDiscounts)
 
-  const purchaseCreatedEvent = new PurchaseCreated(payload, metadata)
+  const purchaseCreatedEvent = new PurchaseCreated(purchaseWithDiscounts, metadata)
   await publishNewPurchase(purchaseCreatedEvent)
 
   return {

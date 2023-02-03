@@ -3,8 +3,8 @@ CreatePurchase:
   name: ${self:service}-${self:provider.stage}-create-purchase-function
   description: Create a new purchase on DB.
   environment:
-    PURCHASES_TABLE: !Ref ClientsTable
-    CLIENTS_TABLE: !Ref PurchasesTable
+    PURCHASES_TABLE: !Ref PurchasesTable
+    CLIENTS_TABLE: !Ref ClientsTable
     PURCHASES_TOPIC: !Ref PurchaseTopic
   iamRoleStatementsName: juanCastroArancibia-integrador-create-purchase
   iamRoleStatementsInherit: true
@@ -26,6 +26,6 @@ CreatePurchase:
         - !GetAtt PurchasesTable.Arn
   events:
     - http:
-        path: /purchases
+        path: /purchases/{client}
         method: post
         cors: true
