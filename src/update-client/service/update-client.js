@@ -1,20 +1,16 @@
 const { updateItem } = require('@ranty/nbased/service/storage/dynamo')
+const { getUpdateParams } = require('../helper/get-update-attributes')
 
-async function updateClient(client) {
-  const result = await updateItem({
+async function updateClient(updated, old) {
+  const { ExpressionAttributeValues, UpdateExpression } = getUpdateParams(updated, old)
+  await updateItem({
     TableName: process.env.CLIENTS_TABLE,
     Key: {
-      dni: client.dni,
+      dni: updated.dni,
     },
-    UpdateExpression: 'SET firstName = :f, lastName = :l, dni = :d, birthdate = :b',
-    ExpressionAttributeValues: {
-      ':f': client.firstName,
-      ':l': client.lastName,
-      ':d': client.dni,
-      ':b': client.birthdate,
-    },
+    UpdateExpression,
+    ExpressionAttributeValues,
   })
-  return result
 }
 
 module.exports = {

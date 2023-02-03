@@ -8,7 +8,7 @@ module.exports = async (payload, metadata) => {
   if (!client) {
     return {
       status: 404,
-      body: { message: 'Client not found' },
+      body: { message: 'No se ha encontrado al cliente' },
     }
   }
 

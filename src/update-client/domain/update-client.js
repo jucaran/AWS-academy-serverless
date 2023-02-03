@@ -1,30 +1,50 @@
 const { ValidateUpdateClientInput } = require('../schema/input/update-client')
 const { ClientUpdated } = require('../schema/event/client-updated')
 const { updateClient } = require('../service/update-client')
+const { getClient } = require('../service/get-client')
 const { publishClient } = require('../service/publish-client')
 const { calculateAge } = require('../helper/calc-age')
+const { getDifferences } = require('../helper/compare')
 
 module.exports = async (payload, metadata) => {
-  console.log("PAYLOAD: ", payload)
-  const client = new ValidateUpdateClientInput(payload, metadata).get()
+  const clientUpdated = new ValidateUpdateClientInput(payload, metadata).get()
 
-  const age = calculateAge(payload.birth)
-  if (age < 18 || age > 65) {
+  const oldClient = await getClient(payload.dni)
+  if (!oldClient)
     return {
-      statusCode: 400,
+      status: 404,
       body: {
-        message: 'El cliente debe tener entre 18 y 65 años' 
+        message: 'No se ha encontrado el cliente',
       },
     }
+
+  const age = calculateAge(payload.birthdate)
+  if (age < 18 || age > 65)
+    return {
+      status: 400,
+      body: {
+        message: 'El cliente debe tener entre 18 y 65 años',
+      },
+    }
+  
+  if (!getDifferences(clientUpdated, oldClient)) return {
+    status: 200,
+    body: {
+      message: 'Cliente sin cambios a actualizar',
+    },
   }
 
-  const result = await updateClient(client)
+  await updateClient(clientUpdated, oldClient)
 
-  // const clientUpdatedEvent = new ClientUpdated(payload, metadata)
-  // await publishClient(clientUpdatedEvent)
+  if (clientUpdated.birthdate !== oldClient.birthdate) {
+    const clientUpdatedEvent = new ClientUpdated(payload, metadata)
+    await publishClient(clientUpdatedEvent)
+  }
 
   return {
     status: 200,
-    body: result,
+    body: {
+      message: 'Cliente actualizado correctamente',
+    },
   }
 }
