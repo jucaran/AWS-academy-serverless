@@ -30,3 +30,4 @@ resources:
   # Queues
   - ${file(resource/queues/assign-card.yml)}
   - ${file(resource/queues/assign-gift.yml)}
+  - ${file(resource/queues/add-points.yml)}
