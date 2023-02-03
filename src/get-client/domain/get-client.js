@@ -2,7 +2,7 @@ const { ValidateGetClientInput } = require('../schema/input/get-client')
 const { getClient } = require('../service/get-client')
 
 module.exports = async (payload, metadata) => {
-  new ValidateGetClientsInput(payload, metadata)
+  new ValidateGetClientInput(payload, metadata)
 
   const client = await getClient(payload.dni)
   if (!client) {
