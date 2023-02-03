@@ -22,6 +22,7 @@ functions:
 
   # Purchases
   - ${file(src/purchases/create-purchase/create-purchase.yml)}
+  - ${file(src/purchases/add-points/add-points.yml)}
 
 
 resources:

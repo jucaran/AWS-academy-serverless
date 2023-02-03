@@ -1,8 +1,8 @@
 'use strict'
 
-const { DownstreamEvent } = require('@ranty/nbased/schema/downstreamEvent')
+const { InputValidation } = require('@ranty/nbased/schema/inputValidation')
 
-const eventSchema = {
+const inputSchema = {
   schema: {
     id: { type: String, required: true },
     client: { type: String, required: true },
@@ -11,26 +11,25 @@ const eventSchema = {
         {
           name: String,
           price: Number,
-          finalPrice: Number,
+          finalPrice: Number
         },
       ],
       required: true,
     },
   },
-  settings: { strict: false },
+  settings: { strict: true },
 }
 
-class PurchaseCreated extends DownstreamEvent {
+class ValidateAddPointsInput extends InputValidation {
   constructor(payload, meta) {
     super({
-      type: 'CREATE_PURCHASE.EVENT',
+      type: 'ADD_POINTS.INPUT',
       specversion: 'v1.0.0',
       source: meta.source,
-      meta,
       payload,
-      eventSchema,
+      inputSchema,
     })
   }
 }
 
-module.exports = { PurchaseCreated }
+module.exports = { ValidateAddPointsInput }

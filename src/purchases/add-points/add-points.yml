@@ -1,0 +1,22 @@
+AddPoints:
+  handler: src/purchases/add-points/handler/add-points.handler
+  name: ${self:service}-${self:provider.stage}-add-points-function
+  environment:
+    CLIENTS_TABLE: !Ref ClientsTable
+  iamRoleStatementsInherit: true
+  iamRoleStatementsName: juanCastroArancibia-integrador-add-points
+  iamRoleStatements: 
+    - Effect: Allow
+      Action:
+        - sqs:ChangeMessageVisibility
+        - sqs:DeleteMessage
+      Resource:
+        - !GetAtt AddPointsQueue.Arn
+    - Effect: Allow
+      Action:
+        - dynamodb:UpdateItem
+      Resource:
+        - !GetAtt ClientsTable.Arn
+  events:
+    - sqs:
+        arn: !GetAtt AddPointsQueue.Arn

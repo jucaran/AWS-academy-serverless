@@ -7,7 +7,7 @@ const inputSchema = {
     dni: { type: String, required: true },
     birthdate: { type: String, required: true },
   },
-  settings: { strict: true },
+  settings: { strict: false },
 }
 
 class ValidateAssignCardInput extends InputValidation {

@@ -15,12 +15,12 @@ module.exports = async (payload, metadata) => {
       status: 404,
       body: { message: 'Cliente no encontrado' },
     }
-  
+
   const purchaseWithDiscounts = getPurchaseWithDiscounts(purchase, client)
 
-  await createPurchase(purchaseWithDiscounts)
+  const id = await createPurchase(purchaseWithDiscounts)
 
-  const purchaseCreatedEvent = new PurchaseCreated(purchaseWithDiscounts, metadata)
+  const purchaseCreatedEvent = new PurchaseCreated({ ...purchaseWithDiscounts, id }, metadata)
   await publishNewPurchase(purchaseCreatedEvent)
 
   return {
