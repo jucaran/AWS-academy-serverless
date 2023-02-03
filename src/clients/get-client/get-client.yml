@@ -1,5 +1,5 @@
 GetClient:
-  handler: src/get-client/handler/get-client.handler
+  handler: src/clients/get-client/handler/get-client.handler
   name: ${self:service}-${self:provider.stage}-get-client-function
   description: Get client by id from DB.
   environment:

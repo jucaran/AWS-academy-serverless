@@ -1,10 +1,10 @@
-AssignCard:
-  handler: src/assign-card/handler/assign-card.handler
-  name: ${self:service}-${self:provider.stage}-assign-card-function
+AssignGift:
+  handler: src/clients/assign-gift/handler/assign-gift.handler
+  name: ${self:service}-${self:provider.stage}-assign-gift-function
   environment:
     CLIENTS_TABLE: !Ref ClientsTable
-  iamRoleStatementsName: juanCastroArancibia-integrador-assign-card
   iamRoleStatementsInherit: true
+  iamRoleStatementsName: juanCastroArancibia-integrador-assign-gift
   iamRoleStatements: 
     - Effect: Allow
       Action:
@@ -18,4 +18,4 @@ AssignCard:
         - !GetAtt ClientsTable.Arn
   events:
     - sqs:
-        arn: !GetAtt AssignCardQueue.Arn
+        arn: !GetAtt AssignGiftQueue.Arn

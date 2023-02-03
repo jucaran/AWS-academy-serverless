@@ -1,18 +1,12 @@
-UpdateClient:
-  handler: src/update-client/handler/update-client.handler
-  name: ${self:service}-${self:provider.stage}-update-client-function
-  description: Update client on DB.
+DeleteClient:
+  handler: src/clients/delete-client/handler/delete-client.handler
+  name: ${self:service}-${self:provider.stage}-delete-client-function
+  description: Deactivate client on DB.
   environment:
     CLIENTS_TABLE: !Ref ClientsTable
-    CLIENT_TOPIC: !Ref ClientTopic
-  iamRoleStatementsName: juanCastroArancibia-integrador-update-client
+  iamRoleStatementsName: juanCastroArancibia-integrador-delete-client
   iamRoleStatementsInherit: true
   iamRoleStatements: 
-    - Effect: Allow
-      Action:
-        - sns:Publish
-      Resource:
-        - !Ref ClientTopic
     - Effect: Allow
       Action:
         - dynamodb:GetItem
@@ -26,5 +20,5 @@ UpdateClient:
   events:
     - http:
         path: /clients/{dni}
-        method: put
+        method: delete
         cors: true
