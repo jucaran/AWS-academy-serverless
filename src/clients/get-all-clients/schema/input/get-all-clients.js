@@ -10,7 +10,7 @@ const inputSchema = {
 class ValidateGetClientsInput extends InputValidation {
   constructor(payload, meta) {
     super({
-      type: 'CREATE_CLIENT.INPUT',
+      type: 'GET_ALL_CLIENTS.INPUT',
       specversion: 'v1.0.0',
       source: meta.source,
       payload,

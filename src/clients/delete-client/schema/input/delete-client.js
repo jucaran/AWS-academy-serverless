@@ -12,7 +12,7 @@ const inputSchema = {
 class ValidateDeleteClientInput extends InputValidation {
   constructor(payload, meta) {
     super({
-      type: 'CREATE_CLIENT.INPUT',
+      type: 'DELETE_CLIENT.INPUT',
       specversion: 'v1.0.0',
       source: meta.source,
       payload,

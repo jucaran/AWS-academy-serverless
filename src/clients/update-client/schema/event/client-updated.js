@@ -15,7 +15,7 @@ const eventSchema = {
 class ClientUpdated extends DownstreamEvent {
   constructor(payload, meta) {
     super({
-      type: 'CREATE_CLIENT.EVENT',
+      type: 'UPDATE_CLIENT.EVENT',
       specversion: 'v1.0.0',
       source: meta.source,
       meta,

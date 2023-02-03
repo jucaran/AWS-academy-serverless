@@ -15,7 +15,7 @@ const inputSchema = {
 class ValidateUpdateClientInput extends InputValidation {
   constructor(payload, meta) {
     super({
-      type: 'CREATE_CLIENT.INPUT',
+      type: 'UPDATE_CLIENT.INPUT',
       specversion: 'v1.0.0',
       source: meta.source,
       payload,
