@@ -1,0 +1,31 @@
+CreatePurchase:
+  handler: src/purchases/create-purchase/handler/create-purchase.handler
+  name: ${self:service}-${self:provider.stage}-create-purchase-function
+  description: Create a new purchase on DB.
+  environment:
+    PURCHASES_TABLE: !Ref ClientsTable
+    CLIENTS_TABLE: !Ref PurchasesTable
+    PURCHASES_TOPIC: !Ref PurchaseTopic
+  iamRoleStatementsName: juanCastroArancibia-integrador-create-purchase
+  iamRoleStatementsInherit: true
+  iamRoleStatements: 
+    - Effect: Allow
+      Action:
+        - sns:Publish
+      Resource:
+        - !Ref PurchaseTopic
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+      Resource:
+        - !GetAtt ClientsTable.Arn
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+      Resource:
+        - !GetAtt PurchasesTable.Arn
+  events:
+    - http:
+        path: /purchases
+        method: post
+        cors: true

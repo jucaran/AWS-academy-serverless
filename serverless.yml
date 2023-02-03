@@ -10,6 +10,7 @@ plugins:
   - serverless-iam-roles-per-function
 
 functions:
+  # Clients
   - ${file(src/clients/create-client/create-client.yml)}
   - ${file(src/clients/update-client/update-client.yml)}
   - ${file(src/clients/delete-client/delete-client.yml)}
@@ -19,6 +20,10 @@ functions:
   - ${file(src/clients/assign-card/assign-card.yml)}
   - ${file(src/clients/assign-gift/assign-gift.yml)}
 
+  # Purchases
+  - ${file(src/purchases/create-purchase/create-purchase.yml)}
+
+
 resources:
   # Tables
   - ${file(resource/tables/clients.yml)}
@@ -26,6 +31,7 @@ resources:
 
   # Topics
   - ${file(resource/topics/client-created.yml)}
+  - ${file(resource/topics/purchase-created.yml)}
 
   # Queues
   - ${file(resource/queues/assign-card.yml)}
