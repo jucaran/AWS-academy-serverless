@@ -1,0 +1,203 @@
+{
+	"info": {
+		"_postman_id": "1752233c-7702-4eab-a2ae-21ea579da069",
+		"name": "juanArancibia-practicoIntegrador",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25628497"
+	},
+	"item": [
+		{
+			"name": "Create Client",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"dni\": \"20303030\",\n    \"firstName\": \"Ana\",\n    \"lastName\": \"Palomar\",\n    \"birthdate\": \"01/09/1965\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qog2eyszf9.execute-api.us-east-1.amazonaws.com/dev/clients",
+					"protocol": "https",
+					"host": [
+						"qog2eyszf9",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Client",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"Anita\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qog2eyszf9.execute-api.us-east-1.amazonaws.com/dev/clients/:dni",
+					"protocol": "https",
+					"host": [
+						"qog2eyszf9",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"clients",
+						":dni"
+					],
+					"variable": [
+						{
+							"key": "dni",
+							"value": "20303030"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get clients",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://qog2eyszf9.execute-api.us-east-1.amazonaws.com/dev/clients",
+					"protocol": "https",
+					"host": [
+						"qog2eyszf9",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get client",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://qog2eyszf9.execute-api.us-east-1.amazonaws.com/dev/clients/:dni",
+					"protocol": "https",
+					"host": [
+						"qog2eyszf9",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"clients",
+						":dni"
+					],
+					"variable": [
+						{
+							"key": "dni",
+							"value": "20303030"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Purchase",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"products\": [\n        { \"name\": \"test2\", \"price\": 1000 }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qog2eyszf9.execute-api.us-east-1.amazonaws.com/dev/purchases/:dni",
+					"protocol": "https",
+					"host": [
+						"qog2eyszf9",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"purchases",
+						":dni"
+					],
+					"variable": [
+						{
+							"key": "dni",
+							"value": "20303030"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar cliente",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://qog2eyszf9.execute-api.us-east-1.amazonaws.com/dev/clients/:dni",
+					"protocol": "https",
+					"host": [
+						"qog2eyszf9",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"clients",
+						":dni"
+					],
+					"variable": [
+						{
+							"key": "dni",
+							"value": "20303030"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
