@@ -11,11 +11,6 @@ GetAllClients:
         - dynamodb:Scan
       Resource:
         - !GetAtt ClientsTable.Arn
-    - Effect: Allow
-      Action:
-        - dynamodb:GetItem
-      Resource:
-        - !GetAtt ClientsTable.Arn
   events:
     - http:
         path: /clients
