@@ -7,10 +7,10 @@ const { calculateAge } = require('../helper/calc-age')
 module.exports = async (commandPayload, commandMeta) => {
   const client = new ValidateCreateClientInput(commandPayload, commandMeta).get()
 
-  const age = calculateAge(commandPayload.birth)
+  const age = calculateAge(commandPayload.birthdate)
   if (age < 18 || age > 65) {
     return {
-      statusCode: 400,
+      status: 400,
       body: {
         message: 'El cliente debe tener entre 18 y 65 años' 
       },
